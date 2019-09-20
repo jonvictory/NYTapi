@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+    <head>
+            <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+        <title>
+
+        </title>
+    </head>
+    <style>
+        header {
+            height: 10vh;
+            background-color: darkblue;
+            color: white;
+            text-align: center;
+        }
+    </style>
+    <body>
+        <header>
+            <h1>nEw y0rk tiMEs Se@rch</h1>
+        </header>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+            <h2>Search Parameters</h2>
+        </div>
+        </div>
+        <form>
+            
+                <div class="form-group">
+                  <label for="seekAndDestroy">Search Term</label>
+                  <input type="text" class="form-control" id="seekDest" aria-describedby="search" placeholder="Search term here">
+                  <small id="emailHelp" class="form-text text-muted">We'll keep track of everything you ever do.</small>
+                </div>
+                <div class="form-group">
+                  <label for="seekNumber">Number of terms</label>
+                  <input type="integer" class="form-control" id="seekNumber" placeholder="Enter number 1-5">
+                </div>
+                <div class="form-group">
+                  <label for="startYear">Start Year (optional)</label>
+                  <input type="year" class="form-control" id="startYear" placeholder="Enter year">
+                </div>
+                <div class="form-group">
+                  <label for="endYear">End Year (optional)</label>
+                  <input type="year" class="form-control" id="endYear" placeholder="Enter year">
+                </div>
+                <button type="submit" id="sub" class="btn btn-primary">Submit</button><button type="clear" class="btn btn-primary">Clear</button>
+              </form>
+        <div id="artHere">
+                <div class="row">
+                        <div class="col-md-12">
+                    <h2>Articles</h2>
+                </div>
+                </div>
+                <div class="row">
+                        <div class="col-md-12">
+                </div>
+                </div>
+
+        </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script>
+        $(document).ready()
+        var seekDest = $("#seekDest").val();
+        // var seekNum = $("#seekNumber").val().trim();
+        // var startYear = $("#startYear").val().trim();
+        // var endYear = $("#endYear").val().trim();
+        var apiKey = "d24NxBBbxFK4VvHbRXpZxvgHoq6CqL0B"
+        $('#sub').click(function(e){
+            e.preventDefault();
+            queryUrl = "https://api.nytimes.com/svc/search/v2/articlesearch.json?q="+seekDest+"&api-key="+apiKey;
+            console.log(queryUrl)
+
+            $.ajax({
+        url: queryUrl,
+        method: "GET"
+      }).then(function(response) {
+            console.log(response)
+        })
+        })
+
+        $('#clear').click(function(){
+            $("#seekAndDestroy, #seekNumber, #startYear, #endYear").empty();
+        })
+        
+    </script>
+    </body>
+</html>
